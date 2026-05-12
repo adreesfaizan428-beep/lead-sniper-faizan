@@ -1,0 +1,22 @@
+[Unit]
+Description=Lead Sniper - Reddit & Upwork Monitor
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/lead_sniper
+ExecStart=/home/ubuntu/lead_sniper/venv/bin/python lead_sniper.py
+Restart=always
+RestartSec=30
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=lead-sniper
+
+# Auto-restart on failure, up to 5 times per 10 minutes
+StartLimitIntervalSec=600
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target
